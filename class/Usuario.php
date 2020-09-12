@@ -132,6 +132,47 @@ class Usuario{
 		return $sql->select("SELECT * FROM users ORDER BY name;");
 	}
 
+	//Busca por nome
+
+	public static function search($login){
+
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM users WHERE name LIKE :SEARCH ORDER BY name", array(
+				'SEARCH'=>"%".$login."%"
+		));
+	}
+
+	//Busca usuário autenticado
+	public function login($login, $password){
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT *FROM users WHERE name = :LOGIN AND password = :PASSWORD", array(
+			":LOGIN" => $login,
+			":PASSWORD" => $password
+		));
+
+		if (count($results) > 0){
+
+			$row = $results[0];
+
+			$this->setId($row['id']);
+			$this->setName($row['name']);
+			$this->setEmail($row['email']);
+			$this->setWhatsapp($row['whatsapp']);
+			$this->setUsername($row['username']);
+			$this->setPassword($row['password']);
+			$this->setCreated($row['created']);
+
+		} else {
+
+			throw new Exception("Login ou senha invalidos");
+			
+		}
+
+	}
+
 
 	/*public function __toString(){
 
