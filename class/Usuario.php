@@ -125,6 +125,14 @@ class Usuario{
 
 	}
 
+	public static function getList(){
+
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM users ORDER BY name;");
+	}
+
+
 	/*public function __toString(){
 
 		return json_encode(array(
