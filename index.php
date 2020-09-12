@@ -9,10 +9,11 @@ $usuarios = $sql->select("SELECT * FROM users");
 
 echo json_encode($usuarios); */
 
-$root = new Usuario();
-
+/*
 $root->loadById(3);
 
-echo json_encode($root);
+echo json_encode($root);*/
+
+
 
 ?>
