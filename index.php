@@ -23,10 +23,25 @@ echo json_encode($lista);*/
 $search = Usuario::search("Gil");
 echo json_encode($search);*/
 
-//login e senha
+/*login e senha
 $usuario = new Usuario();
 $usuario->login("cesar", "123");
 
-echo $usuario;
+echo $usuario;*/
+
+$aluno = new Usuario();
+
+$aluno->setName("Carlos Roberto");
+$aluno->setEmail("gfokjd@gmail.com");
+$aluno->setWhatsapp("21-98765672");
+$aluno->setUsername("cacau");
+$aluno->setPassword("123456");
+
+$aluno->insert();
+
+
+
+
+
 
 ?>

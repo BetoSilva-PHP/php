@@ -95,6 +95,20 @@ class Usuario{
 	}
 
 
+	//setData
+	
+	public function setData($data){
+
+		$this->setId($data['id']);
+		$this->setName($data['name']);
+		$this->setEmail($data['email']);
+		$this->setWhatsapp($data['whatsapp']);
+		$this->setUsername($data['username']);
+		$this->setPassword($data['password']);
+		$this->setCreated(new DateTime($data['created']));
+
+	}
+	
 	//Lendo pelo ID
 
 	public function loadById($id){
@@ -111,19 +125,11 @@ class Usuario{
 		//Usando count
 		if (count($results) > 0){
 
-			$row = $results[0];
-
-			$this->setId($row['id']);
-			$this->setName($row['name']);
-			$this->setEmail($row['email']);
-			$this->setWhatsapp($row['whatsapp']);
-			$this->setUsername($row['username']);
-			$this->setPassword($row['password']);
-			$this->setCreated($row['created']);
+			$this-setData($results[0]);		
 		}
-
-
 	}
+
+	//getList
 
 	public static function getList(){
 
@@ -155,15 +161,7 @@ class Usuario{
 
 		if (count($results) > 0){
 
-			$row = $results[0];
-
-			$this->setId($row['id']);
-			$this->setName($row['name']);
-			$this->setEmail($row['email']);
-			$this->setWhatsapp($row['whatsapp']);
-			$this->setUsername($row['username']);
-			$this->setPassword($row['password']);
-			$this->setCreated($row['created']);
+			$this-setData($results[0]);
 
 		} else {
 
@@ -174,20 +172,25 @@ class Usuario{
 	}
 
 
-	/*public function __toString(){
+	//Inserir usuário.
 
-		return json_encode(array(
-			"id"=>$this->getId(),
-			"name"=>$this->getName(),
-			"email"=>$this->getEmail(),
-			"whatsapp"=>$this->getWhatsapp(),
-			"username"=>$this->getUsername(),
-			"password"=>$this->getPassword(),
-			"created"=>$this->getCreated()->format("d/m/y H:i:s")
+	public function insert(){
 
+		$sql = new Sql();
+
+		$results = $sql->select("CALL sp_usuarios_insert(:LOGIN, :PASSWORD)", array(
+				':LOGIN'=>$this->getName(),
+				':PASSWORD'=>$this->getPassword()
 		));
-	}*/
 
+		if(count($results) > 0){
+
+			$this->setData($results[0]);
+		}
+	}
+
+	
+	
 
 }
 
