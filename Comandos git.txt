@@ -1,0 +1,10 @@
+Comandos gits:
+
+1.
+$ git add --all
+
+2.
+$ git commit -m "comentario pertinente a alteração ou início do projeto"
+
+3.
+$ git push origin master
